@@ -18,7 +18,7 @@
 ```
 
 **Stop burning tokens on commit messages.**  
-AI-powered git commit message generator. Reads your staged diff, follows your rules, and outputs a clean [Conventional Commit](https://www.conventionalcommits.org/) — then asks before it commits.
+Because `fix stuff` is not a commit message. Reads your staged diff, follows your rules, outputs a clean commit — then politely asks before pulling the trigger.
 
 ---
 
