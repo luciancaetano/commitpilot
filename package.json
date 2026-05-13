@@ -1,6 +1,6 @@
 {
   "name": "commitloom",
-  "version": "0.1.12",
+  "version": "0.1.14",
   "description": "AI-powered CLI that generates Conventional Commits from your staged diff — works with Ollama, OpenAI, Anthropic, and OpenRouter",
   "keywords": [
     "git",
@@ -27,7 +27,7 @@
   "bin": {
     "commitloom": "./dist/index.js",
     "cloom": "./dist/index.js",
-    "git-loom": "./dist/index.js"
+    "git-loom": "./dist/git-loom.js"
   },
   "files": [
     "dist/",
