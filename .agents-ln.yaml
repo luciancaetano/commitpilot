@@ -1,0 +1,7 @@
+source: _AGENTS.md
+links:
+  - CLAUDE.md
+  - AGENTS.md
+dirs:
+  - .claude
+  - .opencode
