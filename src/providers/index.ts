@@ -1,4 +1,4 @@
-import { CommitForgeConfig, LLMProvider } from "../types.js";
+import type { CommitForgeConfig, LLMProvider } from "../types.js";
 import { OllamaProvider } from "./ollama.js";
 import { OpenAIProvider } from "./openai.js";
 import { OpenRouterProvider } from "./openrouter.js";

@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { LLMProvider, LLMRequest } from "../types.js";
+import type { LLMProvider, LLMRequest } from "../types.js";
 
 export class OpenAIProvider implements LLMProvider {
   protected readonly defaultBaseUrl: string = "https://api.openai.com/v1";

@@ -1,4 +1,4 @@
-import { GitContext } from "./types.js";
+import type { GitContext } from "./types.js";
 
 const DEFAULT_INSTRUCTIONS = `Generate a concise, descriptive git commit message following the Conventional Commits format.
 Use one of these types: feat, fix, docs, style, refactor, test, chore, perf, ci, build.

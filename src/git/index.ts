@@ -1,5 +1,5 @@
 import { execSync } from "child_process";
-import { GitContext } from "../types.js";
+import type { GitContext } from "../types.js";
 
 function exec(cmd: string, cwd: string): string {
   return execSync(cmd, { cwd, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim();

@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as yaml from "js-yaml";
-import { CommitForgeConfig } from "../types.js";
+import type { CommitForgeConfig } from "../types.js";
 
 const CONFIG_FILE = ".commitforge.yml";
 const INSTRUCTIONS_FILE = ".commitforge.md";

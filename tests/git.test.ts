@@ -17,7 +17,7 @@ beforeEach(() => {
 
 describe("findRepoRoot", () => {
   it("returns the trimmed repo root path", () => {
-    mock.mockReturnValue("/home/user/myrepo\n" as never);
+    mock.mockReturnValue("/home/user/myrepo\n");
     expect(findRepoRoot()).toBe("/home/user/myrepo");
   });
 
@@ -31,12 +31,12 @@ describe("findRepoRoot", () => {
 
 describe("getCurrentBranch", () => {
   it("returns the current branch name", () => {
-    mock.mockReturnValue("feature/auth\n" as never);
+    mock.mockReturnValue("feature/auth\n");
     expect(getCurrentBranch("/repo")).toBe("feature/auth");
   });
 
   it("returns null for detached HEAD state", () => {
-    mock.mockReturnValue("HEAD\n" as never);
+    mock.mockReturnValue("HEAD\n");
     expect(getCurrentBranch("/repo")).toBeNull();
   });
 
@@ -51,9 +51,9 @@ describe("getCurrentBranch", () => {
 describe("collectGitContext", () => {
   it("returns staged diff when available", () => {
     mock
-      .mockReturnValueOnce("/repo" as never)               // git rev-parse --show-toplevel
-      .mockReturnValueOnce("main" as never)                // git rev-parse --abbrev-ref HEAD
-      .mockReturnValueOnce("diff --git a/x b/x\n+1" as never); // git diff --cached
+      .mockReturnValueOnce("/repo")               // git rev-parse --show-toplevel
+      .mockReturnValueOnce("main")                // git rev-parse --abbrev-ref HEAD
+      .mockReturnValueOnce("diff --git a/x b/x\n+1"); // git diff --cached
 
     const ctx = collectGitContext();
     expect(ctx.diff).toBe("diff --git a/x b/x\n+1");
@@ -63,18 +63,18 @@ describe("collectGitContext", () => {
 
   it("throws when there are no staged changes", () => {
     mock
-      .mockReturnValueOnce("/repo" as never)
-      .mockReturnValueOnce("main" as never)
-      .mockReturnValueOnce("" as never); // empty staged diff
+      .mockReturnValueOnce("/repo")
+      .mockReturnValueOnce("main")
+      .mockReturnValueOnce(""); // empty staged diff
 
     expect(() => collectGitContext()).toThrow("No staged changes found");
   });
 
   it("includes branch as null when in detached HEAD", () => {
     mock
-      .mockReturnValueOnce("/repo" as never)
-      .mockReturnValueOnce("HEAD" as never)
-      .mockReturnValueOnce("diff --git a/x b/x" as never);
+      .mockReturnValueOnce("/repo")
+      .mockReturnValueOnce("HEAD")
+      .mockReturnValueOnce("diff --git a/x b/x");
 
     const ctx = collectGitContext();
     expect(ctx.branch).toBeNull();

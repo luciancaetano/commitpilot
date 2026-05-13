@@ -1,5 +1,5 @@
 import { Ollama } from "ollama";
-import { LLMProvider, LLMRequest } from "../types.js";
+import type { LLMProvider, LLMRequest } from "../types.js";
 
 export class OllamaProvider implements LLMProvider {
   async generate(request: LLMRequest): Promise<string> {

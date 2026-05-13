@@ -1,5 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { LLMProvider, LLMRequest } from "../types.js";
+import type { LLMProvider, LLMRequest } from "../types.js";
 
 export class AnthropicProvider implements LLMProvider {
   async generate(request: LLMRequest): Promise<string> {

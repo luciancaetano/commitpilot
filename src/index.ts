@@ -2,7 +2,7 @@
 import { Command } from "commander";
 import { runInit } from "./commands/init.js";
 import { runCommitCommand } from "./commands/commit.js";
-import { GenerateOptions } from "./types.js";
+import type { GenerateOptions } from "./types.js";
 
 const program = new Command();
 
