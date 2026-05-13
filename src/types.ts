@@ -25,6 +25,12 @@ export interface LLMProvider {
   generate(request: LLMRequest): Promise<string>;
 }
 
+export interface PromptMeta {
+  system?: string;
+  language?: string;
+  final?: string;
+}
+
 export interface GenerateOptions {
   config?: string;
   instructions?: string;

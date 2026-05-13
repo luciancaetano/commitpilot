@@ -31,7 +31,21 @@ maxTokens: 512
 # apiKey: sk-ant-...
 `;
 
-const DEFAULT_INSTRUCTIONS = `You are a git commit message generator. Analyze the staged diff and produce a single commit message following the Conventional Commits v1.0.0 specification.
+const DEFAULT_INSTRUCTIONS = `---
+system: "You are a git commit message generator."
+language: en
+# final: "Generate the commit message now. Output only the commit message — a single line, no explanation."
+#
+# Tip: change language to pt-BR, es, fr, de… and translate the body below
+# to have commit messages generated in that language.
+#
+# Spanish example:
+#   system: "Eres un generador de mensajes de commit git."
+#   language: es
+#   final: "Genera el mensaje de commit ahora. Solo el mensaje, sin explicaciones."
+---
+
+You are a git commit message generator. Analyze the staged diff and produce a single commit message following the Conventional Commits v1.0.0 specification.
 
 ## Output rule
 

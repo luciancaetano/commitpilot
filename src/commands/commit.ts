@@ -73,7 +73,7 @@ async function regenerate(
     "---",
     `Previously generated message: ${current}`,
     `User feedback: ${feedback}`,
-    "Generate a new commit message incorporating this feedback. Single line only.",
+    "Generate a new commit message incorporating this feedback. Single line only. Use the same language as the instructions.",
   ].join("\n\n");
 
   process.stderr.write("Regenerating...\n");
