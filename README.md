@@ -61,15 +61,15 @@ cloom uninstall
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `cloom install` | Register `git loom` as a native git subcommand |
-| `cloom uninstall` | Remove the `git loom` subcommand |
-| `cloom init` | Initialize config and instruction files in the current repo |
-| `cloom c` | Same as `git loom` (direct alias) |
-| `cloom c --config <path>` | Override config file for this run |
-| `cloom c --instructions <path>` | Override instruction file for this run |
-| `cloom c --verbose` | Show prompt and raw LLM response |
+| Command                         | Description                                                 |
+|---------------------------------|-------------------------------------------------------------|
+| `cloom install`                 | Register `git loom` as a native git subcommand              |
+| `cloom uninstall`               | Remove the `git loom` subcommand                            |
+| `cloom init`                    | Initialize config and instruction files in the current repo |
+| `cloom c`                       | Same as `git loom` (direct alias)                           |
+| `cloom c --config <path>`       | Override config file for this run                           |
+| `cloom c --instructions <path>` | Override instruction file for this run                      |
+| `cloom c --verbose`             | Show prompt and raw LLM response                            |
 
 ---
 
@@ -89,12 +89,12 @@ maxTokens: 512
 
 ### Providers
 
-| Provider | `provider` value | Notes |
-|----------|-----------------|-------|
-| [Ollama](https://ollama.com) | `ollama` | Local, free, no key needed |
-| [OpenAI](https://platform.openai.com) | `openai` | Needs `apiKey` or `OPENAI_API_KEY` |
-| [OpenRouter](https://openrouter.ai) | `openrouter` | Needs `apiKey` or `OPENROUTER_API_KEY` |
-| [Anthropic](https://www.anthropic.com) | `anthropic` | Needs `apiKey` or `ANTHROPIC_API_KEY` |
+| Provider                               | `provider` value | Notes                                  |
+|----------------------------------------|------------------|----------------------------------------|
+| [Ollama](https://ollama.com)           | `ollama`         | Local, free, no key needed             |
+| [OpenAI](https://platform.openai.com)  | `openai`         | Needs `apiKey` or `OPENAI_API_KEY`     |
+| [OpenRouter](https://openrouter.ai)    | `openrouter`     | Needs `apiKey` or `OPENROUTER_API_KEY` |
+| [Anthropic](https://www.anthropic.com) | `anthropic`      | Needs `apiKey` or `ANTHROPIC_API_KEY`  |
 
 **Provider examples:**
 
@@ -130,11 +130,11 @@ final: "Generate the commit message now. Only the message, no explanation."
 Follow Conventional Commits. Keep the subject under 72 characters.
 ```
 
-| Field | Required | Description |
-|-------|----------|-------------|
-| `system` | No | Overrides the LLM system role |
-| `language` | No | Forces output language (`en`, `pt-BR`, `es`, `fr`…) |
-| `final` | No | Overrides the closing instruction appended after the diff |
+| Field      | Required | Description                                               |
+|------------|----------|-----------------------------------------------------------|
+| `system`   | No       | Overrides the LLM system role                             |
+| `language` | No       | Forces output language (`en`, `pt-BR`, `es`, `fr`…)       |
+| `final`    | No       | Overrides the closing instruction appended after the diff |
 
 ---
 
@@ -157,26 +157,48 @@ This commit is related to task #{{task-id}}.
 
 ## Ollama setup (local, free)
 
+1. **Install Ollama** — https://ollama.com/download
+2. **Pull a model** — downloads it to your machine (~GB, one-time):
+
 ```bash
-# Install: https://ollama.com/download
-ollama pull qwen2.5-coder:7b   # default model (~8 GB RAM)
+ollama pull qwen2.5-coder:7b
 ```
 
-Other models (all local via Ollama):
+3. **Use it** — set the model name in `.commitloom.yml`:
 
-| Model | Pull command | RAM | GPU VRAM | CPU? | Quality |
-|-------|-------------|-----|----------|------|---------|
-| `qwen2.5-coder:7b` ⭐ | `ollama pull qwen2.5-coder:7b` | 8 GB | 6 GB | ✅ slow | Good |
-| `qwen2.5-coder:14b` | `ollama pull qwen2.5-coder:14b` | 12 GB | 10 GB | ✅ very slow | Better |
-| `qwen2.5-coder:32b` | `ollama pull qwen2.5-coder:32b` | 24 GB | 20 GB | ⚠️ impractical | Excellent |
-| `qwen3:8b` | `ollama pull qwen3:8b` | 8 GB | 6 GB | ✅ slow | Better |
-| `qwen3:14b` | `ollama pull qwen3:14b` | 12 GB | 10 GB | ✅ very slow | Very good |
-| `qwen3:32b` | `ollama pull qwen3:32b` | 24 GB | 20 GB | ⚠️ impractical | Excellent |
-| `deepseek-coder-v2:16b` | `ollama pull deepseek-coder-v2:16b` | 16 GB | 12 GB | ⚠️ very slow | Very good |
-| `codellama:13b` | `ollama pull codellama:13b` | 12 GB | 10 GB | ✅ slow | Good |
-| `devstral` | `ollama pull devstral` | 16 GB | 14 GB | ❌ not recommended | Excellent |
+```yaml
+provider: ollama
+model: qwen2.5-coder:7b
+```
 
-> Models ≤ 8B são usáveis em CPU (3–10 tokens/s). Apple Silicon lida melhor com modelos maiores por usar memória unificada.
+To switch models later, just pull the new one and update the config:
+
+```bash
+ollama pull qwen2.5-coder:7b
+# then update .commitloom.yml: model: codellama:13b
+```
+
+Available models:
+
+| Model                   | RAM   | GPU VRAM | CPU?              | Quality   |
+|-------------------------|-------|----------|-------------------|-----------|
+| `qwen2.5-coder:32b`     | 24 GB | 20 GB    | ⚠️ impractical     | Excellent |
+| `qwen3:32b`             | 24 GB | 20 GB    | ⚠️ impractical     | Excellent |
+| `deepseek-coder-v2:16b` | 16 GB | 12 GB    | ⚠️ very slow       | Very good |
+| `phi4-mini`             | 4 GB  | 3 GB     | ✅ fast            | Good      |
+| `codellama:13b` ⭐       | 12 GB | 10 GB    | ✅ slow            | Good      |
+| `qwen2.5-coder:7b` ⭐    | 8 GB  | 6 GB     | ✅ slow            | Good      |
+| `qwen3:8b`              | 8 GB  | 6 GB     | ✅ slow            | Better    |
+| `phi4:14b`              | 10 GB | 8 GB     | ✅ slow            | Very good |
+| `qwen2.5-coder:14b`     | 12 GB | 10 GB    | ✅ very slow       | Better    |
+| `qwen3:14b`             | 12 GB | 10 GB    | ✅ very slow       | Very good |
+| `devstral`              | 16 GB | 14 GB    | ❌ not recommended | Excellent |
+
+**Recommendations:**
+- **CPU only** — `phi4-mini`: 4 GB RAM, runs fast enough without a GPU
+- **GPU 8 GB VRAM** — `phi4:14b`: fits exactly in 8 GB, noticeably better quality than 7B models
+
+> Models ≤ 8B are usable on CPU (3–10 tokens/s). Apple Silicon handles larger models better due to unified memory.
 
 ---
 
